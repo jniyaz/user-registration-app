@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthenticateService } from 'src/app/services/authenticate.service';
 import { TokenService } from 'src/app/services/token.service';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,10 +18,15 @@ export class LoginComponent {
 
   public errors = null;
 
-  constructor(private Auth: AuthService, private Token: TokenService) { }
+  constructor(
+    private Authenticate: AuthenticateService, 
+    private Token: TokenService,
+    private router: Router,
+    private Auth: AuthService
+    ) { }
 
   onSubmit() {
-    this.Auth.userLogin(this.form).subscribe(
+    this.Authenticate.userLogin(this.form).subscribe(
       data => this.handleResponse(data),
       error => this.handleError(error)
     )
@@ -27,6 +34,8 @@ export class LoginComponent {
 
   handleResponse(data) {
     this.Token.handle(data.access_token);
+    this.Auth.changeAuthStatus(true);
+    this.router.navigateByUrl('/profile');
   }
 
   handleError(error) {

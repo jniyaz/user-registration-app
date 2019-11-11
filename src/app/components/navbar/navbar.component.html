@@ -14,10 +14,16 @@
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" routerLink="/login">Login</a>
+          <a class="nav-link" *ngIf="!loggedIn" routerLink="/login">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/register">Register</a>
+          <a class="nav-link" *ngIf="!loggedIn" routerLink="/register">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="loggedIn" routerLink="/profile">Profile</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" *ngIf="loggedIn" href="#" (click)="logout($event)">Logout</a>
         </li>
       </ul>
     </div>

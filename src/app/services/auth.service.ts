@@ -1,21 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
 
-  private baseUrl = 'http://cus-tw.localhost/api';
+  private loggedIn = new BehaviorSubject< boolean > (this.Token.loggedIn());
 
-  constructor(private http: HttpClient) { }
+  authStatus = this.loggedIn.asObservable();
 
-  userRegister(data) {
-    return this.http.post(`${this.baseUrl}/auth/register`, data)
+  changeAuthStatus(value : boolean) {
+    return this.loggedIn.next(value);
   }
 
-  userLogin(data) {
-    return this.http.post(`${this.baseUrl}/auth/login`, data)
-  }
-
+  constructor(private Token: TokenService) { }
 }

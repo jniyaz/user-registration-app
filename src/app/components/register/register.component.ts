@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticateService } from 'src/app/services/authenticate.service';
+import { TokenService } from 'src/app/services/token.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -17,16 +20,27 @@ export class RegisterComponent implements OnInit {
 
   public errors = [];
 
-  constructor(private Auth: AuthService) { }
+  constructor(
+    private Authenticate: AuthenticateService,
+    private Token: TokenService,
+    private Auth: AuthService,
+    private router: Router
+    ) { }
 
   ngOnInit() {
   }
 
   onSubmit() {
-    return this.Auth.userRegister(this.form).subscribe(
-      data => console.log(data),
+    return this.Authenticate.userRegister(this.form).subscribe(
+      data => this.handleResponse(data),
       error => this.handleError(error)
     )
+  }
+
+  handleResponse(data) {
+    this.Token.handle(data.access_token);
+    this.Auth.changeAuthStatus(true);
+    this.router.navigateByUrl('/profile');
   }
 
   handleError(error) {
