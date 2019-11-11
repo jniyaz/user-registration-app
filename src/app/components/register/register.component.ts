@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -17,13 +17,13 @@ export class RegisterComponent implements OnInit {
 
   public errors = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private Auth: AuthService) { }
 
   ngOnInit() {
   }
 
   onSubmit() {
-    return this.http.post('http://cus-tw.localhost/api/auth/register', this.form).subscribe(
+    return this.Auth.userRegister(this.form).subscribe(
       data => console.log(data),
       error => this.handleError(error)
     )

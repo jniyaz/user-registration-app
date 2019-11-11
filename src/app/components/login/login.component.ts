@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import { AuthService } from 'src/app/services/auth.service';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-login',
@@ -16,13 +16,17 @@ export class LoginComponent {
 
   public errors = null;
 
-  constructor(private http: HttpClient) { }
+  constructor(private Auth: AuthService, private Token: TokenService) { }
 
   onSubmit() {
-    this.http.post('http://cus-tw.localhost/api/auth/login', this.form).subscribe(
-      data => console.log(data),
+    this.Auth.userLogin(this.form).subscribe(
+      data => this.handleResponse(data),
       error => this.handleError(error)
     )
+  }
+
+  handleResponse(data) {
+    this.Token.handle(data.access_token);
   }
 
   handleError(error) {
