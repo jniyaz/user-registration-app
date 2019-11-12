@@ -11,11 +11,19 @@ export class UserAuthService {
   constructor(private http: HttpClient) { }
 
   userRegister(data) {
-    return this.http.post(`${this.baseUrl}/auth/register`, data)
+    return this.http.post(`${this.baseUrl}/auth/register`, data);
   }
 
   userLogin(data) {
-    return this.http.post(`${this.baseUrl}/auth/login`, data)
+    return this.http.post(`${this.baseUrl}/auth/login`, data);
+  }
+
+  sendPasswordResetLink(data) {
+    return this.http.post(`${this.baseUrl}/auth/send-reset-password-link`, data);
+  }
+
+  changePassword(data) {
+    return this.http.post(`${this.baseUrl}/auth/change-reset-password`, data);
   }
 
 }

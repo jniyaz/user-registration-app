@@ -1,1 +1,19 @@
-<p>request-reset works!</p>
+<div class="col-md-8 offset-2"> 
+        <div class="card">
+            <div class="card-header">Reset Password</div>
+            <div class="card-body">
+                <form class="form-reset" #resetForm=ngForm (ngSubmit)="onSubmit()">
+                    <div class="alert alert-danger" [hidden]="!errors">
+                        {{ errors }}
+                    </div>
+                    
+                    <label for="inputEmail" class="sr-only">Email address</label>
+                    <input type="email" id="email" name="email" class="form-control mb-3" placeholder="Email address" [(ngModel)]="form.email" required autofocus>
+                    
+                    <div class="d-flex justify-content-between mt-3">
+                        <div><button class="btn btn-md btn-primary btn-block" type="submit" [disabled]="!resetForm.valid">Send Reset Password   </button></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

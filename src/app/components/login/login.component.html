@@ -21,8 +21,10 @@
                     <div><button class="btn btn-md btn-primary btn-block" type="submit" [disabled]="!loginForm.valid">Login</button></div>
                     <div><button class="btn btn-md btn-info btn-block" type="button" routerLink="/register">Register</button></div>
                 </div>
-                
             </form>
+            <small class="float-right">
+                <a routerLink="/request-reset-password">Forget Password?</a>
+            </small>
         </div>
         <div class="card-footer">
             <p class="text-muted">&copy; 2019</p>

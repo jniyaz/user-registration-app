@@ -7,6 +7,8 @@ import { AboutComponent } from './components/about/about.component';
 import { HomeComponent } from './components/home/home.component';
 import { BeforeLoginService } from './services/before-login.service';
 import { AfterLoginService } from './services/after-login.service';
+import { RequestResetComponent } from './components/password/request-reset/request-reset.component';
+import { ResponseResetComponent } from './components/password/response-reset/response-reset.component';
 
 
 const routes: Routes = [
@@ -28,6 +30,16 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+    canActivate: [BeforeLoginService]
+  },
+  {
+    path: 'request-reset-password',
+    component: RequestResetComponent,
+    canActivate: [BeforeLoginService]
+  },
+  {
+    path: 'response-reset-password',
+    component: ResponseResetComponent,
     canActivate: [BeforeLoginService]
   },
   {
