@@ -18,7 +18,6 @@ export class TokenService {
 
   set(token) {
     localStorage.setItem('token', token);
-    console.log(this.isValid());
   }
 
   get() {
@@ -34,7 +33,7 @@ export class TokenService {
     if(token) {
       const payload = this.payload(token)
       if(payload) {
-        return Object.values(this.iss).indexOf(payload.iss) ? true : false;
+        return Object.values(this.iss).indexOf(payload.iss) > -1 ? true : false;
       }
     }
 

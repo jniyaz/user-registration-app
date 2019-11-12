@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticateService } from 'src/app/services/authenticate.service';
 import { TokenService } from 'src/app/services/token.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserAuthService } from 'src/app/services/user-auth.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +19,7 @@ export class LoginComponent {
   public errors = null;
 
   constructor(
-    private Authenticate: AuthenticateService, 
+    private Authenticate: UserAuthService, 
     private Token: TokenService,
     private router: Router,
     private Auth: AuthService

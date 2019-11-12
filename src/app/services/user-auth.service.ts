@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticateService {
+export class UserAuthService {
 
   private baseUrl = 'http://cus-tw.localhost/api';
 

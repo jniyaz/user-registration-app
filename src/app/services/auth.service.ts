@@ -8,7 +8,7 @@ import { TokenService } from './token.service';
 
 export class AuthService {
 
-  private loggedIn = new BehaviorSubject< boolean > (this.Token.loggedIn());
+  private loggedIn = new BehaviorSubject<boolean> (this.Token.loggedIn());
 
   authStatus = this.loggedIn.asObservable();
 
